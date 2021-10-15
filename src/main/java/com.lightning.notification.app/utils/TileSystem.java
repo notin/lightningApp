@@ -2,7 +2,7 @@ package com.lightning.notification.app.utils;
 
 import org.apache.commons.lang3.tuple.MutablePair;
 
-public class TileSystem
+public class                TileSystem
 {
     private static double earthRadius = 6378137;
     private static double minLatitude = -85.05112878;
@@ -205,5 +205,13 @@ public class TileSystem
             }
         }
         return new MutablePair<>(tileX, tileY);
+    }
+
+    public static String latLongToQuadKey(double lat, double longi, int levelOfDetail) {
+
+        MutablePair<Integer, Integer> pixels = TileSystem.latLongToPixelXY(lat, longi, levelOfDetail);
+        MutablePair<Integer, Integer> tiles = TileSystem.pixelXYToTileXY(pixels.getLeft(), pixels.getRight());
+        String s = TileSystem.tileXYToQuadKey(tiles.getLeft(), tiles.getRight(), levelOfDetail);
+        return s;
     }
 }  
