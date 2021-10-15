@@ -51,11 +51,15 @@ public class LightningProcessingService {
     }
 
     private void addToList(HashMap<String, Lightning> lightnings, String x) {
-        Lightning lightning = new Gson().fromJson(x, Lightning.class);
-        String s = TileSystem.latLongToQuadKey(lightning.getLatitude(), lightning.getLongitude(), 12);
-        if(!lightnings.containsKey(s)){
-            lightnings.put(s, lightning);
+        try {
+            Lightning lightning = new Gson().fromJson(x, Lightning.class);
+            String s = TileSystem.latLongToQuadKey(lightning.getLatitude(), lightning.getLongitude(), 12);
+            if(!lightnings.containsKey(s)){
+                lightnings.put(s, lightning);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
-
 }
